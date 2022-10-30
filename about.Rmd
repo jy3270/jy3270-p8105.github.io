@@ -7,7 +7,7 @@ output:
 ---
 
 # This is Jeff's awesome website
-This awsome website is made in rmarkdown and other stuff.
+This awesome website is made in rmarkdown and other stuff.
 
 
 Here's some text. I like the internet. I use [google](http://www.google.com/) all the time to do data science.
@@ -16,6 +16,9 @@ Here's some text. I like the internet. I use [google](http://www.google.com/) al
 # put picture from somewhere else
 This is my cat ted, who likes to be on the iternet.
 ![](images/ted.jpg)
+<center>
+<img src="images/image.jpg" style="width:25%">
+</center>
 
 ```{r}
 library(tidyverse)
