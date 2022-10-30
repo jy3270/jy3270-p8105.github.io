@@ -1,28 +1,22 @@
 ---
-title: "Plotly"
+title: "Airbnb Dashboard"
 output: 
-  html_document:
-    toc: true
-    toc_float: true
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
 ---
 
-We are going to make some plotly plots.
-
-## Load packages and data
-
-```{r}
+```{r setup, include=FALSE}
 library(tidyverse)
 library(p8105.datasets)
 library(plotly)
+library(flexdashboard)
 ```
 
-Let's get some data
 
-```{r}
+```{r, include = FALSE}
 data("nyc_airbnb")
-```
 
-```{r}
 nyc_airbnb = nyc_airbnb %>% 
   mutate(rating = review_scores_location / 2) %>%
   select(
@@ -35,7 +29,10 @@ nyc_airbnb = nyc_airbnb %>%
 drop_na(rating)
 ```
 
-Let's make a scatterplot！！
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
 
 ```{r}
 nyc_airbnb %>%
@@ -48,6 +45,13 @@ nyc_airbnb %>%
     alpha = .5, text = ~text_label
   )
 ```
+
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
 ```{r}
 nyc_airbnb %>%
   mutate(neighbourhood = fct_reorder(neighbourhood, price)) %>%
@@ -55,7 +59,8 @@ nyc_airbnb %>%
          type = "box")
 ```
 
-Can we make a bar plot?
+### Chart C
+
 ```{r}
 nyc_airbnb %>% 
   count(neighbourhood) %>%
@@ -64,17 +69,3 @@ nyc_airbnb %>%
           type = "bar")
 ```
 
-## ggplotly ...
-
-```{r}
-ggp_scatterplot = 
-  nyc_airbnb %>%
-  ggplot(aes(x = lat, y = long, color = price)) +
-  geom_point()
-
-ggplotly(ggp_scatterplot)
-```
-  
-## Create a dashboard ...
-
-Not here though.
